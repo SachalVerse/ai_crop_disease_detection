@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop AI - Smart Agriculture Dashboard</title>
+    <meta name="description" content="AI-powered crop monitoring and disease detection system.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="dark-mode">
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-container">
+                <i class="fas fa-leaf logo-icon"></i>
+                <span class="logo-text">Crop AI</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active" data-tab="dashboard">
+                    <i class="fas fa-th-large"></i>
+                    <span class="nav-label">Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" data-tab="predict">
+                    <i class="fas fa-user-md"></i>
+                    <span class="nav-label">Crop Doctor</span>
+                </a>
+                <a href="#" class="nav-item" data-tab="camera">
+                    <i class="fas fa-video"></i>
+                    <span class="nav-label">Live Feed</span>
+                </a>
+                <a href="#" class="nav-item" data-tab="history">
+                    <i class="fas fa-clipboard-list"></i>
+                    <span class="nav-label">Records</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="status-indicator">
+                    <div class="status-dot" id="system-status-dot"></div>
+                    <span id="system-status-text">Checking System...</span>
+                </div>
+                <div class="ml-status" id="ml-status-box">
+                    <i class="fas fa-brain"></i> <span id="ml-status-text">ML: Offline</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left">
+                    <p class="welcome-text" id="welcome-msg">Welcome Back,</p>
+                    <h1 id="page-title">Dashboard</h1>
+                    <p class="subtitle" id="page-subtitle">Smart Farming Ecosystem</p>
+                </div>
+                <div class="header-right">
+                    <div class="language-switch">
+                        <button id="lang-en" class="active">EN</button>
+                        <button id="lang-ur">اردو</button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Tab -->
+            <section id="dashboard-tab" class="tab-content active">
+                <div class="sensor-grid">
+                    <div class="sensor-card glass" id="temp-card">
+                        <div class="sensor-icon-wrapper temp">
+                            <i class="fas fa-temperature-high"></i>
+                        </div>
+                        <div class="sensor-info">
+                            <span class="sensor-label">Temperature</span>
+                            <h2 class="sensor-value"><span id="val-temp">--</span>°C</h2>
+                        </div>
+                    </div>
+                    <div class="sensor-card glass" id="hum-card">
+                        <div class="sensor-icon-wrapper hum">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <div class="sensor-info">
+                            <span class="sensor-label">Humidity</span>
+                            <h2 class="sensor-value"><span id="val-hum">--</span>%</h2>
+                        </div>
+                    </div>
+                    <div class="sensor-card glass" id="soil-card">
+                        <div class="sensor-icon-wrapper soil">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <div class="sensor-info">
+                            <span class="sensor-label">Soil Moisture</span>
+                            <h2 class="sensor-value"><span id="val-soil-pct">--</span>%</h2>
+                            <small class="sensor-sub">Raw: <span id="val-soil-raw">--</span></small>
+                        </div>
+                    </div>
+                    <div class="sensor-card glass" id="light-card">
+                        <div class="sensor-icon-wrapper light">
+                            <i class="fas fa-sun"></i>
+                        </div>
+                        <div class="sensor-info">
+                            <span class="sensor-label">Light Intensity</span>
+                            <h2 class="sensor-value"><span id="val-light">--</span> <small>lx</small></h2>
+                        </div>
+                    </div>
+                    <div class="sensor-card glass" id="rain-card">
+                        <div class="sensor-icon-wrapper rain">
+                            <i class="fas fa-cloud-showers-heavy"></i>
+                        </div>
+                        <div class="sensor-info">
+                            <span class="sensor-label">Rain Status</span>
+                            <h2 class="sensor-value" id="val-rain">--</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="charts-container">
+                    <div class="chart-card glass">
+                        <h3>Environmental Trends</h3>
+                        <canvas id="trendsChart"></canvas>
+                    </div>
+                    <div class="status-card glass">
+                        <h3>System Configuration</h3>
+                        <div class="config-list">
+                            <div class="config-item">
+                                <span>Sensor URL:</span>
+                                <code id="conf-esp-url">Loading...</code>
+                            </div>
+                            <div class="config-item">
+                                <span>Camera URL:</span>
+                                <code id="conf-cam-url">Loading...</code>
+                            </div>
+                            <div class="config-item">
+                                <span>Model Status:</span>
+                                <span id="conf-model">Checking...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Prediction Tab -->
+            <section id="predict-tab" class="tab-content">
+                <div class="predict-container">
+                    <div class="upload-section glass">
+                        <div id="drop-zone" class="drop-zone">
+                            <div class="upload-icon-pulse">
+                                <i class="fas fa-microscope"></i>
+                            </div>
+                            <p>Drag and drop crop image or</p>
+                            <button class="btn btn-primary" id="browse-btn">
+                                <i class="fas fa-folder-open"></i> Browse Files
+                            </button>
+                            <input type="file" id="file-input" hidden accept="image/*">
+                        </div>
+                        <div id="image-preview-container" class="hidden">
+                            <img id="image-preview" src="" alt="Preview">
+                            <div class="preview-actions">
+                                <button class="btn btn-secondary" id="remove-img">
+                                    <i class="fas fa-trash-alt"></i> Remove
+                                </button>
+                                <button class="btn btn-primary" id="analyze-btn">
+                                    <i class="fas fa-search-plus"></i> Analyze Crop
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="predict-results" class="results-section glass hidden">
+                        <div class="result-header">
+                            <h3>Analysis Result</h3>
+                            <div class="confidence-badge" id="res-confidence">--%</div>
+                        </div>
+                        <div class="result-body">
+                            <div class="disease-info">
+                                <h2 id="res-disease">Detected Disease</h2>
+                                <p id="res-category">Category</p>
+                            </div>
+                            <div class="guidance-box">
+                                <h4>Guidance & Treatment</h4>
+                                <p id="res-guidance">Feeding AI for recommendations...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Camera Tab -->
+            <section id="camera-tab" class="tab-content">
+                <div class="camera-container glass">
+                    <div class="camera-header">
+                        <h3>ESP32-CAM Live Feed</h3>
+                    </div>
+                    <div class="camera-feed" id="camera-feed-container">
+                        <img id="latest-cam-img" src="" alt="No capture found">
+                        <div id="cam-status" class="cam-overlay">Loading feed...</div>
+                        <div class="camera-actions">
+                            <button class="btn btn-primary" id="predict-camera-btn">
+                                <i class="fas fa-microscope"></i> Analyze This Capture
+                            </button>
+                            <button class="btn btn-secondary" id="refresh-camera">
+                                <i class="fas fa-sync-alt"></i> Refresh Capture
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- History Tab -->
+            <section id="history-tab" class="tab-content">
+                <div class="history-grid">
+                    <div class="history-card glass">
+                        <h3>Recent Predictions</h3>
+                        <div class="table-responsive">
+                            <table id="predictions-table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Disease</th>
+                                        <th>Confidence</th>
+                                        <th>Image</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Rows added by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Chat Widget -->
+        <div class="chat-widget" id="chat-widget">
+            <button class="chat-toggle" id="chat-toggle">
+                <i class="fas fa-comment-alt"></i>
+                <span class="pulse-ring"></span>
+            </button>
+            <div class="chat-container glass hidden" id="chat-container">
+                <div class="chat-header">
+                    <div class="bot-info">
+                        <i class="fas fa-robot"></i>
+                        <span>Crop AI Assistant</span>
+                    </div>
+                    <button id="close-chat"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="chat-messages" id="chat-messages">
+                    <div class="message bot">
+                        Hello! I'm your AI agronomy assistant. How can I help you today?
+                    </div>
+                </div>
+                <div class="chat-input">
+                    <input type="text" id="chat-input-field" placeholder="Ask about crops...">
+                    <button id="send-chat"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Global Toast -->
+        <div id="toast-container"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
