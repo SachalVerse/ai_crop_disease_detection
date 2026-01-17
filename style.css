@@ -945,23 +945,858 @@ tr:hover td {
     }
 }
 
+@media (max-width: 1280px) {
+    .main-content {
+        padding: 2rem;
+    }
+
+    .charts-container {
+        grid-template-columns: 1fr;
+    }
+}
+
 @media (max-width: 1024px) {
     .sidebar {
         width: 80px;
-        padding: 2rem 1rem;
+        padding: 1.5rem 1rem;
     }
 
     .logo-text,
     .nav-item span,
-    .status-indicator span {
+    .status-indicator span,
+    .ml-status {
         display: none;
     }
 
     .main-content {
         margin-left: 80px;
+        padding: 1.5rem;
     }
 
     .predict-container {
         grid-template-columns: 1fr;
+    }
+
+    .top-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .sensor-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+    }
+
+    .sensor-card {
+        padding: 1.5rem;
+        gap: 1rem;
+    }
+
+    .sensor-value {
+        font-size: 1.5rem;
+    }
+
+    .chat-container {
+        width: 320px;
+        height: 450px;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --sidebar-width: 280px;
+    }
+
+    .app-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 1rem 1rem;
+        border-right: none;
+        border-bottom: 1px solid var(--glass-border);
+        z-index: 50;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .logo-icon {
+        display: none;
+    }
+
+    .logo-container {
+        margin-bottom: 0;
+        gap: 0;
+    }
+
+    .logo-text {
+        display: inline;
+        font-size: 1.1rem;
+    }
+
+    .nav-menu {
+        flex-direction: row;
+        gap: 8px;
+        flex: 1;
+        margin: 0 2rem;
+    }
+
+    .nav-item {
+        padding: 10px 16px;
+        font-size: 0.85rem;
+    }
+
+    .nav-item span {
+        display: inline;
+    }
+
+    .sidebar-footer {
+        flex-direction: row;
+        gap: 1rem;
+        padding-top: 0;
+        border-top: none;
+        margin-left: auto;
+    }
+
+    .status-indicator {
+        display: flex;
+    }
+
+    .status-indicator span {
+        display: inline;
+    }
+
+    .ml-status {
+        display: flex;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 1.5rem;
+        flex: 1;
+    }
+
+    .top-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .header-left h1 {
+        font-size: 1.5rem;
+    }
+
+    .header-right {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .sensor-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+    }
+
+    .sensor-card {
+        padding: 1rem;
+        gap: 0.75rem;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .sensor-icon-wrapper {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+
+    .sensor-value {
+        font-size: 1.25rem;
+    }
+
+    .sensor-label {
+        font-size: 0.8rem;
+    }
+
+    .charts-container {
+        display: none;
+    }
+
+    .chart-card {
+        min-height: 280px;
+        padding: 1rem;
+    }
+
+    .status-card {
+        padding: 1rem;
+    }
+
+    .predict-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .upload-section {
+        padding: 1.5rem;
+    }
+
+    .drop-zone {
+        padding: 2rem 1rem;
+    }
+
+    .upload-icon-pulse {
+        width: 80px;
+        height: 80px;
+        font-size: 2rem;
+        margin: 0 auto 1rem;
+    }
+
+    #image-preview-container img {
+        max-height: 300px;
+    }
+
+    .results-section {
+        padding: 1.5rem;
+    }
+
+    .disease-info h2 {
+        font-size: 1.8rem;
+    }
+
+    .guidance-box {
+        padding: 1.5rem;
+        margin-top: 1.5rem;
+    }
+
+    .camera-feed {
+        aspect-ratio: 16/9;
+    }
+
+    .camera-actions {
+        position: static;
+        margin-top: 1rem;
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+    }
+
+    .camera-actions button {
+        flex: 1;
+        min-width: 120px;
+        font-size: 0.8rem;
+        padding: 10px 12px;
+    }
+
+    .history-card {
+        padding: 1rem;
+    }
+
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    table {
+        min-width: 100%;
+    }
+
+    th, td {
+        padding: 12px 16px;
+        font-size: 0.85rem;
+    }
+
+    .history-thumb {
+        width: 40px;
+        height: 40px;
+    }
+
+    .chat-widget {
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .chat-toggle {
+        width: 55px;
+        height: 55px;
+        font-size: 1.4rem;
+    }
+
+    .chat-container {
+        width: calc(100vw - 40px);
+        max-width: 360px;
+        height: 500px;
+        bottom: 75px;
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .chat-container.hidden {
+        transform: scale(0.8) translateX(-50%);
+    }
+
+    .chat-messages {
+        padding: 1rem;
+    }
+
+    .message {
+        max-width: 85%;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+
+    .language-switch {
+        padding: 3px;
+    }
+
+    .language-switch button {
+        padding: 5px 10px;
+        font-size: 0.8rem;
+    }
+
+    .config-item {
+        padding: 10px;
+        font-size: 0.85rem;
+    }
+
+    .config-item code {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .main-content {
+        padding: 1rem;
+    }
+
+    .top-header h1 {
+        font-size: 1.25rem;
+    }
+
+    .welcome-text {
+        font-size: 0.85rem;
+    }
+
+    .subtitle {
+        font-size: 0.8rem;
+    }
+
+    .sensor-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 0.75rem;
+    }
+
+    .sensor-card {
+        padding: 0.75rem;
+    }
+
+    .sensor-icon-wrapper {
+        width: 45px;
+        height: 45px;
+        font-size: 1.25rem;
+    }
+
+    .sensor-value {
+        font-size: 1.1rem;
+    }
+
+    .sensor-label {
+        font-size: 0.75rem;
+    }
+
+    .nav-menu {
+        margin: 0 1rem;
+        gap: 4px;
+    }
+
+    .nav-item {
+        padding: 8px 12px;
+        font-size: 0.75rem;
+    }
+
+    .logo-icon {
+        font-size: 1.5rem;
+    }
+
+    .logo-text {
+        font-size: 1rem;
+    }
+
+    .chart-card {
+        min-height: 250px;
+        padding: 0.75rem;
+    }
+
+    .status-card {
+        padding: 0.75rem;
+    }
+
+    .upload-section {
+        padding: 1rem;
+    }
+
+    .drop-zone {
+        padding: 1.5rem 1rem;
+    }
+
+    .drop-zone p {
+        margin-bottom: 1rem;
+        font-size: 0.85rem;
+    }
+
+    .upload-icon-pulse {
+        width: 70px;
+        height: 70px;
+        font-size: 1.75rem;
+        margin: 0 auto 0.75rem;
+    }
+
+    #image-preview-container img {
+        max-height: 250px;
+    }
+
+    .btn {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+    }
+
+    .btn i {
+        font-size: 0.9rem;
+    }
+
+    .disease-info h2 {
+        font-size: 1.5rem;
+    }
+
+    .disease-info p {
+        font-size: 0.9rem;
+    }
+
+    .guidance-box {
+        padding: 1rem;
+        margin-top: 1rem;
+    }
+
+    .guidance-box h4 {
+        font-size: 0.75rem;
+    }
+
+    .results-section {
+        padding: 1rem;
+        border-left-width: 4px;
+    }
+
+    .result-header {
+        margin-bottom: 1rem;
+    }
+
+    .confidence-badge {
+        padding: 4px 12px;
+        font-size: 0.8rem;
+    }
+
+    .camera-feed {
+        aspect-ratio: 16/9;
+    }
+
+    .camera-actions {
+        margin-top: 0.75rem;
+    }
+
+    .camera-actions button {
+        font-size: 0.75rem;
+        padding: 8px 10px;
+    }
+
+    .chat-toggle {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+
+    .chat-container {
+        width: calc(100vw - 30px);
+        max-width: 320px;
+        height: 450px;
+        bottom: 65px;
+    }
+
+    .chat-header {
+        padding: 1rem;
+    }
+
+    .chat-messages {
+        padding: 0.75rem;
+        gap: 8px;
+    }
+
+    .message {
+        font-size: 0.85rem;
+        padding: 10px 12px;
+        max-width: 90%;
+    }
+
+    .chat-input {
+        padding: 0.75rem;
+        gap: 8px;
+    }
+
+    .chat-input input {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+
+    #send-chat {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+    }
+
+    th, td {
+        padding: 10px 12px;
+        font-size: 0.75rem;
+    }
+
+    .history-thumb {
+        width: 35px;
+        height: 35px;
+    }
+
+    .toast {
+        min-width: 200px;
+        padding: 10px 16px;
+        font-size: 0.85rem;
+    }
+
+    #toast-container {
+        top: 10px;
+        right: 10px;
+        gap: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content {
+        padding: 0.75rem;
+    }
+
+    .top-header {
+        gap: 0.5rem;
+    }
+
+    .top-header h1 {
+        font-size: 1.1rem;
+        margin: 2px 0;
+    }
+
+    .welcome-text {
+        font-size: 0.8rem;
+    }
+
+    .subtitle {
+        font-size: 0.75rem;
+    }
+
+    .sensor-grid {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+
+    .sensor-card {
+        padding: 0.5rem;
+        gap: 0.5rem;
+    }
+
+    .sensor-icon-wrapper {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    .sensor-info {
+        flex: 1;
+    }
+
+    .sensor-value {
+        font-size: 1rem;
+    }
+
+    .sensor-label {
+        font-size: 0.7rem;
+    }
+
+    .sensor-sub {
+        font-size: 0.65rem;
+    }
+
+    .sidebar {
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+
+    .logo-container {
+        gap: 6px;
+    }
+
+    .nav-menu {
+        order: 3;
+        width: 100%;
+        margin: 0;
+        gap: 4px;
+    }
+
+    .nav-item {
+        flex: 1;
+        padding: 6px 8px;
+        font-size: 0.7rem;
+        justify-content: center;
+    }
+
+    .nav-item i {
+        font-size: 0.9rem;
+    }
+
+    .sidebar-footer {
+        order: 2;
+        gap: 0.5rem;
+        margin-left: auto;
+    }
+
+    .status-indicator {
+        gap: 6px;
+        font-size: 0.8rem;
+    }
+
+    .ml-status {
+        padding: 4px 8px;
+        font-size: 0.7rem;
+    }
+
+    .chart-card {
+        min-height: 220px;
+        padding: 0.5rem;
+    }
+
+    .chart-card h3,
+    .status-card h3 {
+        font-size: 0.9rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .status-card {
+        padding: 0.5rem;
+    }
+
+    .config-list {
+        gap: 8px;
+    }
+
+    .config-item {
+        padding: 8px;
+        font-size: 0.75rem;
+    }
+
+    .config-item code {
+        font-size: 0.7rem;
+        margin-top: 2px;
+    }
+
+    .upload-section {
+        padding: 0.75rem;
+    }
+
+    .drop-zone {
+        padding: 1rem 0.75rem;
+    }
+
+    .drop-zone p {
+        font-size: 0.8rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .upload-icon-pulse {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+        margin: 0 auto 0.5rem;
+    }
+
+    .btn {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+
+    .btn i {
+        font-size: 0.85rem;
+    }
+
+    #image-preview-container img {
+        max-height: 200px;
+    }
+
+    .results-section {
+        padding: 0.75rem;
+    }
+
+    .result-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .disease-info h2 {
+        font-size: 1.25rem;
+    }
+
+    .disease-info p {
+        font-size: 0.85rem;
+    }
+
+    .guidance-box {
+        padding: 0.75rem;
+        margin-top: 0.75rem;
+    }
+
+    .guidance-box h4 {
+        font-size: 0.7rem;
+        gap: 4px;
+        margin-bottom: 8px;
+    }
+
+    .camera-feed {
+        aspect-ratio: 16/9;
+    }
+
+    .cam-overlay {
+        bottom: 10px;
+        left: 10px;
+        padding: 3px 10px;
+        font-size: 0.7rem;
+    }
+
+    .camera-actions {
+        margin-top: 0.5rem;
+        gap: 0.5rem;
+    }
+
+    .camera-actions button {
+        font-size: 0.7rem;
+        padding: 6px 8px;
+    }
+
+    .camera-header h3 {
+        font-size: 1rem;
+    }
+
+    .chat-toggle {
+        width: 45px;
+        height: 45px;
+        font-size: 1rem;
+        bottom: 15px;
+        right: 15px;
+    }
+
+    .chat-container {
+        width: calc(100vw - 20px);
+        max-width: 300px;
+        height: 400px;
+        bottom: 55px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .chat-header {
+        padding: 0.75rem;
+    }
+
+    .bot-info {
+        gap: 6px;
+        font-size: 0.9rem;
+    }
+
+    .chat-messages {
+        padding: 0.5rem;
+        gap: 6px;
+    }
+
+    .message {
+        font-size: 0.8rem;
+        padding: 8px 10px;
+        max-width: 92%;
+    }
+
+    .message.bot {
+        border-bottom-left-radius: 2px;
+    }
+
+    .message.user {
+        border-bottom-right-radius: 2px;
+    }
+
+    .chat-input {
+        padding: 0.5rem;
+        gap: 6px;
+    }
+
+    .chat-input input {
+        padding: 6px 10px;
+        font-size: 0.85rem;
+        border-radius: 8px;
+    }
+
+    #send-chat {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        font-size: 0.85rem;
+    }
+
+    #close-chat {
+        width: 28px;
+        height: 28px;
+        font-size: 0.85rem;
+    }
+
+    th, td {
+        padding: 8px 10px;
+        font-size: 0.7rem;
+    }
+
+    th {
+        padding: 8px 10px;
+    }
+
+    .history-thumb {
+        width: 30px;
+        height: 30px;
+    }
+
+    .toast {
+        min-width: 180px;
+        padding: 8px 12px;
+        font-size: 0.8rem;
+    }
+
+    #toast-container {
+        top: 8px;
+        right: 8px;
+        gap: 6px;
+    }
+
+    .language-switch {
+        padding: 2px;
+    }
+
+    .language-switch button {
+        padding: 4px 8px;
+        font-size: 0.7rem;
     }
 }
